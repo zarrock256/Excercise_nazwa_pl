@@ -7,6 +7,7 @@ import Pages.MailBoxPage;
 import Pages.MainPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 
 
 import java.util.ArrayList;
@@ -27,21 +28,23 @@ public class CheckIfUserCanLogIn {
 
     @Test
     public void CheckIfUserCanLogInTest() {
+
         driver.get(config.getAttribute("nazwaPlUrl"));
         LoginPageActions.typeLoginAndPasswordFromJsonAndSubmit(driver, config);
         String codeNumber = driver.findByXpath(CodeVerificationPage.CODE_NUMBER)
                 .getText();
-
         driver.findByXpath(CodeVerificationPage.CODE_INPUT)
                 .sendKeys(getMailCode(codeNumber));
         driver.findByXpath(CodeVerificationPage.LOG_IN)
                 .click();
-
+        new Actions(driver)
+                .moveToElement(driver.findByXpath(MainPage.CLIENTS_PANEL))
+                .build()
+                .perform();
         Assertions.assertEquals(
                 driver.findByXpath(MainPage.CLIENTS_NICK).getText(),
                 config.getAttribute("login")
         );
-
         driver.exit();
     }
 

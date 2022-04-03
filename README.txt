@@ -25,5 +25,5 @@ Steps of the test:
 7) Verify if user has logged in properly.
 
 To start test some data must be prepared dependently on the paths to required files:
-CheckIfUserCanLogIn.java:22 - path to chromedricer.exe
+CheckIfUserCanLogIn.java:22 - path to chromedriver.exe
 CheckIfUserCanLogIn.java:24 - path to json file with required data such as login, password etc
