@@ -13,6 +13,9 @@ import java.util.List;
 
 public class Driver extends ChromeDriver {
 
+    public static int SHORT_WAIT = 30;
+    public static int MEDIUM_WAIT = 60;
+    public static int LONG_WAIT = 180;
 
 
     public Driver(){ super(); }
@@ -20,7 +23,7 @@ public class Driver extends ChromeDriver {
     public WebElement findByXpath(By by) {
         try {
             FluentWait wait = new FluentWait(this);
-            wait.withTimeout(Duration.ofSeconds(5))
+            wait.withTimeout(Duration.ofSeconds(SHORT_WAIT))
                     .pollingEvery(Duration.ofMillis(500))
                     .ignoring(ElementNotInteractableException.class, NoSuchElementException.class);
             wait.until(ExpectedConditions.elementToBeClickable(by));
@@ -34,7 +37,7 @@ public class Driver extends ChromeDriver {
     public List<WebElement> findAllByXpath(By by) {
         try {
             FluentWait wait = new FluentWait(this);
-            wait.withTimeout(Duration.ofSeconds(5))
+            wait.withTimeout(Duration.ofSeconds(SHORT_WAIT))
                     .pollingEvery(Duration.ofMillis(500))
                     .ignoring(ElementNotInteractableException.class, NoSuchElementException.class);
             wait.until(ExpectedConditions.elementToBeClickable(by));
@@ -46,20 +49,20 @@ public class Driver extends ChromeDriver {
     }
 
     public void closeSecondTabAndSwitchToTheFirstOne() {
-        ArrayList<String> tabs = new ArrayList<String> (this.getWindowHandles());
+        ArrayList<String> tabs = new ArrayList<> (this.getWindowHandles());
         try {
             this.switchTo().window(tabs.get(1))
                     .close();
             this.switchTo().window(tabs.get(0));
         }catch(IndexOutOfBoundsException e){
-            Assertions.fail("There is only one tab opened, can't close the second one.\n" + e.toString());
+            Assertions.fail("There is only one tab opened, can't close the second one.\n" + e);
         }
     }
 
     public void openNewTabAndGetURL(String url) {
 
         FluentWait wait = new FluentWait(this);
-        wait.withTimeout(Duration.ofSeconds(5))
+        wait.withTimeout(Duration.ofSeconds(SHORT_WAIT))
                 .pollingEvery(Duration.ofMillis(500));
         this.switchTo().newWindow(WindowType.TAB);
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));

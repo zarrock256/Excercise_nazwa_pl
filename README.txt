@@ -1,10 +1,19 @@
-Excersise_nazwa_pl project is designed for automating test of logging into existing accout to nazwa.pl website.
+Project: Excersise_nazwa_pl
+Author: Kamil Nagórzański
 
-Project is Page Object Model orientated, with required data exported to JSON file.
+Project is designed for automating test of logging into existing accout to nazwa.pl website.
+It is Page Object Model pattern orientated, with required data exported to JSON file.
 
+#Entities package
 Config class allows to read from JSON file without worrying about exceptions.
 Driver class extends ChromeDriver class. It has implemented secure methods of searching and waiting for elements
 using FluentWait class.
+
+#Actions package
+Contains only action of logging into website.
+
+#Pages package
+Contains xpaths for proper page's web elements.
 
 Steps of the test:
 1) Type in login and password to the account.
@@ -15,3 +24,6 @@ Steps of the test:
 6) Click "Zaloguj się" button.
 7) Verify if user has logged in properly.
 
+To start test some data must be prepared dependently on the paths to required files:
+CheckIfUserCanLogIn.java:22 - path to chromedricer.exe
+CheckIfUserCanLogIn.java:24 - path to json file with required data such as login, password etc
