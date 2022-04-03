@@ -28,7 +28,7 @@ public class CheckIfUserCanLogIn {
     @Test
     public void CheckIfUserCanLogInTest() {
         driver.get(config.getAttribute("nazwaPlUrl"));
-        LoginPageActions.typeLoginAndPasswordFromJsonAndSubmit(driver);
+        LoginPageActions.typeLoginAndPasswordFromJsonAndSubmit(driver, config);
         String codeNumber = driver.findByXpath(CodeVerificationPage.CODE_NUMBER)
                 .getText();
 
@@ -37,9 +37,12 @@ public class CheckIfUserCanLogIn {
         driver.findByXpath(CodeVerificationPage.LOG_IN)
                 .click();
 
-        Assertions.assertEquals(String.format(MainPage.CLIENTS_NICK, config.getAttribute("login")), config.getAttribute("login"));
+        Assertions.assertEquals(
+                driver.findByXpath(MainPage.CLIENTS_NICK).getText(),
+                config.getAttribute("login")
+        );
 
-        //driver.closeAndQuit();
+        driver.exit();
     }
 
     private String getMailCode(String codeNumber) {

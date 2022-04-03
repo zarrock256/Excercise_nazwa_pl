@@ -1,1 +1,0 @@
-# Excercise_nazwa_pl

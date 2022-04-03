@@ -8,8 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginPageActions {
 
-    public static void typeLoginAndPasswordFromJsonAndSubmit(Driver driver) {
-        Config config = new Config("C:\\Users\\Kamil\\Desktop\\Excersise_NazwaPl\\src\\main\\resources\\confs\\data.json");
+    public static void typeLoginAndPasswordFromJsonAndSubmit(Driver driver, Config config) {
         driver.findByXpath(MainPage.CLIENTS_PANEL)
                 .click();
         driver.findByXpath(LoginPage.LOGIN_INPUT)
