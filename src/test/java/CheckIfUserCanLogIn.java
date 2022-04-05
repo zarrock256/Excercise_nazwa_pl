@@ -58,7 +58,7 @@ public class CheckIfUserCanLogIn {
                 .sendKeys(config.getAttribute("mailPassword"));
         driver.findByXpath(MailBoxPage.NEXT_BUTTON)
                 .click();
-        driver.findByXpath(By.xpath(String.format(MailBoxPage.CODE_SPAN, codeNumber)))
+        driver.findByXpath(By.xpath(String.format(MailBoxPage.CODE_SPAN, codeNumber)), Driver.LONG_WAIT)
                 .click();
         String code = driver.findAllByXpath(MailBoxPage.CODE_NUMBER)
                 .get(0).getText();

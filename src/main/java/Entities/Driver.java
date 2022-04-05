@@ -34,6 +34,20 @@ public class Driver extends ChromeDriver {
         }
     }
 
+    public WebElement findByXpath(By by, int timeOut) {
+        try {
+            FluentWait wait = new FluentWait(this);
+            wait.withTimeout(Duration.ofSeconds(timeOut))
+                    .pollingEvery(Duration.ofMillis(500))
+                    .ignoring(ElementNotInteractableException.class, NoSuchElementException.class);
+            wait.until(ExpectedConditions.elementToBeClickable(by));
+            return this.findElement(by);
+        }catch(Exception e){
+            Assertions.fail("Element located by " + by.toString() + " couldn't be found");
+            return null;
+        }
+    }
+
     public List<WebElement> findAllByXpath(By by) {
         try {
             FluentWait wait = new FluentWait(this);
